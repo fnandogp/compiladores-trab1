@@ -1,24 +1,32 @@
-alogoritmo idade;
+/*
+Código que recebe um inteiro e diz se esse inteiro, que é uma idade, é adulto, idoso ou jovem.
+*/
 
+//inicio do algoritomo
+algoritmo idade;
+
+//variáveis
 variáveis
 	idade: inteiro;
 	nome: literal;
 fim-variáveis
 
-inicio
+//inicio do programa
+início
 	imprima("Digita seu nome:");
 	nome := leia();
     
 	imprima(nome, " , digite sua idade:");
 	idade := leia();
 
+	//operador SE / ENTÃO / SENÃO
 	se idade >= 18 então
 		se idade < 60 então
 			imprima("adulto!");
 		senão
-			imprima("ancião!");
+			imprima("idoso!");
 		fim-se
 	senão
-		imprima("menor", "!");
+		imprima("jovem", "!");
 	fim-se
 fim
