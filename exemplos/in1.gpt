@@ -16,7 +16,7 @@ início
 	imprima("Digita seu nome:");
 	nome := leia();
     
-	imprima(nome, " , digite sua idade:");
+	imprima(nome, ", digite sua idade:");
 	idade := leia();
 
 	//operador SE / ENTÃO / SENÃO
