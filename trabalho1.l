@@ -63,7 +63,7 @@ falso	 					{printf("%s -> LOGICO\n", yytext);}
 
 [a-zA-Z_][a-zA-Z0-9_]*		{printf("%s -> IDENTIFICADOR\n",yytext);} 
 
-=							{printf("%s -> ATRIBUICAO\n",yytext);} 
+:=							{printf("%s -> ATRIBUICAO\n",yytext);} 
 
 [ \t\n] ;
 
