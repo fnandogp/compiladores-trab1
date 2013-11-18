@@ -1,9 +1,0 @@
-/*
-    Nosso primeiro programa
-*/
-
-algoritmo olamundo;
-
-inicio
-    imprima("Olá mundo!");
-fim

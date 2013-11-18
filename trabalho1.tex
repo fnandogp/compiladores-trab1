@@ -5,7 +5,7 @@
 \usepackage[utf8]{inputenc}
 
 \title{Compiladores - Trabalho 1}
-\author{Fernando Guimar\~aes Pinheiro}
+\author{Fernando Guimarães Pinheiro}
 
 \begin{document}
 
@@ -14,14 +14,14 @@
 
 
 \section{Objetivo}
-	Cria\c c\~ao de um analizador l\'exico para a linguagem G-Portugol.
+	Criação de um analizador léxico para a linguagem G-Portugol.
 
 \section{Requisitos}
 
 	\subsection{Arquivo de entrada}
-		O arquivo de entrada dever\'a ser um programa em G-Portgual.
+		O arquivo de entrada deverá ser um programa em G-Portgual.
 
-		O analisador deve reconhecer os seguintes s\'imbolos:
+		O analisador deve reconhecer os seguintes símbolos:
 		\begin{itemize}
 		\item Palavra Reservada
 		\item Identificador
@@ -29,29 +29,29 @@
 		\item Real
 		\item Caractere
 		\item Literal
-		\item Logico
-		\item Operador Aritm\'etico
+		\item Lógico
+		\item Operador Aritmético
 		\item Operador Relacional
-		\item Operador L\'ogico
-		\item S\'imbolo Especial
-		\item Atribui\c c\~ao
+		\item Operador Lógico
+		\item Símbolo Especial
+		\item Atribuição
 		\end{itemize}
 
-		E dever\~ao ser desconsiderados:
+		E deverão ser desconsiderados:
 		\begin{itemize}
-		 \item Espa\c cos
+		 \item Espaços
 		 \item Tabs
 		 \item Enters
  		 \item Comentarios de linha e de bloco
 		\end{itemize}
 
 
-	\subsection{Sa\'ida}
-		Para cada s\'imbolo reconhecido da linguagem dever\'a ser gerada uma sa\'ida no terminal.
-		Coment\'arios n\~ao apresentam saida e s\'imbolos n\~a reconhecidos tamb\'em s\~ao possuem saida.
+	\subsection{Saída}
+		Para cada símbolo reconhecido da linguagem deverá ser gerada uma saída no terminal.
+		Comentários não apresentam saida e símbolos não reconhecidos também são possuem saida.
 
 	\subsection{Exemplo}
-		C\'odigo de entrada:
+		Código de entrada:
 
 		\begin{verbatim}
 		// meu primeiro programa em g-portugol
@@ -74,7 +74,7 @@
 		fim
 		\end{verbatim}
 
-		C\'odigo de saída:
+		Código de saída:
 
 		\begin{verbatim}
 		algoritmo -> PALAVRA RESERVADA
@@ -124,7 +124,7 @@
 
 
 \section{Desenvolvimento}
-	\subsection{Coment\'arios}
+	\subsection{Comentários}
 		Foi utilizado como base o manual onde a conversão léxica era apresentada da seguinte maneira:
 		\begin{verbatim}
 			SL_COMMENT : "//" [^LF]* ('\n')?
@@ -168,7 +168,7 @@
 
 	\subsection{Literal}
 		\begin{verbatim}
-		\'([^\\]|\\.)?\'
+		\"([^\"\\\n\r]|\\.)*\"
 		\end{verbatim}
 
 	\subsection{Operador Aritmético}
@@ -193,10 +193,10 @@
 
 	\subsection{Atribuição}
 		\begin{verbatim}
-		=
+		:=
 		\end{verbatim}
 
-	\subsection{Espa\c cos, Tabs e Enters}
+	\subsection{Espaços, Tabs e Enters}
 		\begin{verbatim}
 		[ \t\n]
 		\end{verbatim}

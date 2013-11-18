@@ -48,7 +48,7 @@ retorne 					{printf("%s -> PALAVRA RESERVADA\n",yytext);}
 
 \'([^\\]|\\.)?\'			{printf("%s -> CARACTERE\n", yytext);}
 
-\"([^\"\\\n\r]|\\.)*\"		{printf("%s -> LEXICO\n", yytext);}
+\"([^\"\\\n\r]|\\.)*\"		{printf("%s -> LITERAL\n", yytext);}
 
 verdadeiro |
 falso	 					{printf("%s -> LOGICO\n", yytext);}

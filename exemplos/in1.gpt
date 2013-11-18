@@ -20,13 +20,18 @@ início
 	idade := leia();
 
 	//operador SE / ENTÃO / SENÃO
+	imprima("Nome:", nome, " / Faixa etária: ", faixa_etaria(idade));
+fim
+
+função faixa_etaria(idade: inteiro) : literal
+início
 	se idade >= 18 então
 		se idade < 60 então
-			imprima("adulto!");
+			retorne "adulto";
 		senão
-			imprima("idoso!");
+			retorne "idoso";
 		fim-se
 	senão
-		imprima("jovem", "!");
+		retorne "jovem";
 	fim-se
 fim
