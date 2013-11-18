@@ -1,0 +1,209 @@
+\documentclass[a4paper,10pt]{article}
+\usepackage{graphicx,url}
+\usepackage[brazil]{babel}
+%\usepackage[latin1]{inputenc}
+\usepackage[utf8]{inputenc}
+
+\title{Compiladores - Trabalho 1}
+\author{Fernando Guimar\~aes Pinheiro}
+
+\begin{document}
+
+\maketitle
+
+
+
+\section{Objetivo}
+	Cria\c c\~ao de um analizador l\'exico para a linguagem G-Portugol.
+
+\section{Requisitos}
+
+	\subsection{Arquivo de entrada}
+		O arquivo de entrada dever\'a ser um programa em G-Portgual.
+
+		O analisador deve reconhecer os seguintes s\'imbolos:
+		\begin{itemize}
+		\item Palavra Reservada
+		\item Identificador
+		\item Inteiro
+		\item Real
+		\item Caractere
+		\item Literal
+		\item Logico
+		\item Operador Aritm\'etico
+		\item Operador Relacional
+		\item Operador L\'ogico
+		\item S\'imbolo Especial
+		\item Atribui\c c\~ao
+		\end{itemize}
+
+		E dever\~ao ser desconsiderados:
+		\begin{itemize}
+		 \item Espa\c cos
+		 \item Tabs
+		 \item Enters
+ 		 \item Comentarios de linha e de bloco
+		\end{itemize}
+
+
+	\subsection{Sa\'ida}
+		Para cada s\'imbolo reconhecido da linguagem dever\'a ser gerada uma sa\'ida no terminal.
+		Coment\'arios n\~ao apresentam saida e s\'imbolos n\~a reconhecidos tamb\'em s\~ao possuem saida.
+
+	\subsection{Exemplo}
+		C\'odigo de entrada:
+
+		\begin{verbatim}
+		// meu primeiro programa em g-portugol
+		algoritmo primeiro;
+
+		variáveis
+			resposta: literal;
+		fim-variáveis
+
+		início
+
+			imprima("Este e seu primeiro programa em g-portugol? (s/n)");
+			resposta := leia();
+
+			se resposta = "s" então
+				imprima("Sim, este e seu primeiro programa em g-portugol!");
+			senão
+				imprima("Não, ja fiz outros programas em g-portugol.");
+			fim-se
+		fim
+		\end{verbatim}
+
+		C\'odigo de saída:
+
+		\begin{verbatim}
+		algoritmo -> PALAVRA RESERVADA
+		primeiro -> IDENTIFICADOR
+		; -> SIMBOLO ESPECIAL
+		variáveis -> PALAVRA RESERVADA
+		resposta -> IDENTIFICADOR
+		: -> SIMBOLO ESPECIAL
+		literal -> PALAVRA RESERVADA
+		; -> SIMBOLO ESPECIAL
+		fim-variáveis -> PALAVRA RESERVADA
+		início -> PALAVRA RESERVADA
+		imprima -> PALAVRA RESERVADA
+		( -> SIMBOLO ESPECIAL
+		"Este e seu primeiro programa em g-portugol? (s/n)" -> LEXICO
+		) -> SIMBOLO ESPECIAL
+		; -> SIMBOLO ESPECIAL
+		resposta -> IDENTIFICADOR
+		: -> SIMBOLO ESPECIAL
+		= -> OPERADOR RELACIONAL
+		leia -> PALAVRA RESERVADA
+		( -> SIMBOLO ESPECIAL
+		) -> SIMBOLO ESPECIAL
+		; -> SIMBOLO ESPECIAL
+		se -> PALAVRA RESERVADA
+		resposta -> IDENTIFICADOR
+		= -> OPERADOR RELACIONAL
+		"s" -> LEXICO
+		então -> PALAVRA RESERVADA
+		imprima -> PALAVRA RESERVADA
+		( -> SIMBOLO ESPECIAL
+		"Sim, este e seu primeiro programa em g-portugol!" -> LEXICO
+		) -> SIMBOLO ESPECIAL
+		; -> SIMBOLO ESPECIAL
+		senão -> PALAVRA RESERVADA
+		imprima -> PALAVRA RESERVADA
+		( -> SIMBOLO ESPECIAL
+		"Não, ja fiz outros programas em g-portugol." -> LEXICO
+		) -> SIMBOLO ESPECIAL
+		; -> SIMBOLO ESPECIAL
+		fim-se -> PALAVRA RESERVADA
+		fim -> PALAVRA RESERVADA
+
+		\end{verbatim}
+
+		 
+
+
+\section{Desenvolvimento}
+	\subsection{Coment\'arios}
+		Foi utilizado como base o manual onde a conversão léxica era apresentada da seguinte maneira:
+		\begin{verbatim}
+			SL_COMMENT : "//" [^LF]* ('\n')?
+			ML_COMMENT : "/*" ( ~('*') | '*' ~'/' )* "*/"
+		\end{verbatim}
+
+	\subsection{Palavras reservadas}
+		Foram usadas as palavras reservadas contidas no manual da linguagem
+		passado como referência.
+		\begin{verbatim}
+		algoritmo|variáveis|fim-variáveis|início|
+		fim|inteiro|inteiros|caractere|caracteres|
+		real|reais|literal|lógico|lógicos|matriz|
+		se|então|senão|fim-se|para|de|até|faça|
+		fim-para|passo|enquanto|fim-enquanto|
+		imprima|leia|função|retorne
+		\end{verbatim}
+
+	\subsection{Lógico}
+		\begin{verbatim}
+		verdadeiro|falso
+		\end{verbatim}
+
+	\subsection{Inteiro}
+		\begin{verbatim}
+		("+"|"-")?[0-9]+ |
+		0(x|X)[0-9a-fA-f]+ |
+		0(c|C)[0-7]+ |
+		0(b|B)[0-1]+
+		\end{verbatim}
+
+	\subsection{Real}
+		\begin{verbatim}
+		("+"|-)?[0-9]"."[0-9]+
+		\end{verbatim}
+
+	\subsection{Caractere}
+		\begin{verbatim}
+		\'([^\\]|\\.)?\'
+		\end{verbatim}
+
+	\subsection{Literal}
+		\begin{verbatim}
+		\'([^\\]|\\.)?\'
+		\end{verbatim}
+
+	\subsection{Operador Aritmético}
+		%(\+|\-|\/|\*|\%|\+\+­­)
+		\begin{verbatim}
+		\end{verbatim}
+
+	\subsection{Operador Relacional}
+		\begin{verbatim}
+		(\>|\>\=|\<|\<\=|\=|\<\>)
+		\end{verbatim}
+
+	\subsection{Operador Lógico}
+		\begin{verbatim}
+		&&|"||"|!|ou|e
+		\end{verbatim}
+
+	\subsection{Símbolo especial}
+		\begin{verbatim}
+		(\"|\(|\)|\.|\,|\;|\:|\{|\}|\#|\'|\\)
+		\end{verbatim}
+
+	\subsection{Atribuição}
+		\begin{verbatim}
+		=
+		\end{verbatim}
+
+	\subsection{Espa\c cos, Tabs e Enters}
+		\begin{verbatim}
+		[ \t\n]
+		\end{verbatim}
+
+	\subsection{Desconhecido}
+		\begin{verbatim}
+		.
+		\end{verbatim}
+
+\end{document}
